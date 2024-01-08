@@ -1,8 +1,7 @@
 use crate::{
     Board, Piece,
     PieceType::{Bishop, King, Knight, Pawn, Queen, Rook},
-    Player::{Black, White},
-    Row, EMPTY_ROW, Cell, utils,
+    Player::{Black, White}, utils,
 };
 
 pub fn format_board_ascii(board: &Board) -> String {
@@ -71,7 +70,7 @@ pub fn format_board_fancy(board: &Board) -> String {
                     formatted.push_str("   ");
                 }
             }
-            
+
             // reset colors
             formatted.push_str("\x1B[0m");
         }

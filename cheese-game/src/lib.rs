@@ -4,6 +4,7 @@ mod utils;
 pub mod format_utils;
 pub mod cells;
 pub mod game;
+mod pieces;
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum PieceType {
@@ -74,6 +75,8 @@ impl Board {
     }
 }
 
+
+/// Chess uses bottom-left indices
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct Cell(usize);
 
@@ -90,7 +93,7 @@ impl Cell {
 impl Display for Cell {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let (row, col) = self.to_row_col();
-        let rowc = match row {
+        let colc = match col {
             0 => 'a',
             1 => 'b',
             2 => 'c',
@@ -102,6 +105,6 @@ impl Display for Cell {
             _ => panic!()
         };
 
-        write!(f, "{}{}", rowc, col + 1)
+        write!(f, "{}{}", colc, row + 1)
     }
 }

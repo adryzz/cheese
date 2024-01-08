@@ -2,7 +2,7 @@ use std::ops::BitXor;
 
 use crate::{
     Board, Piece,
-    PieceType::{Bishop, King, Knight, Pawn, Queen, Rook},
+    PieceType::{Bishop, King, Knight, Pawn, Queen, Rook, self},
     Player::{Black, White},
     Row, EMPTY_ROW, Cell,
 };
@@ -35,22 +35,33 @@ const BLACK_SECOND: Row = Row([Some(Piece::new(Black, Pawn)); 8]);
 
 pub fn init_board() -> Board {
     Board([
-        BLACK_SECOND,
-        BLACK_FIRST,
-        EMPTY_ROW,
-        EMPTY_ROW,
-        EMPTY_ROW,
-        EMPTY_ROW,
         WHITE_FIRST,
         WHITE_SECOND,
+        EMPTY_ROW,
+        EMPTY_ROW,
+        EMPTY_ROW,
+        EMPTY_ROW,
+        BLACK_SECOND,
+        BLACK_FIRST,
     ])
 }
 
-pub fn is_cell_colored(index: Cell) -> bool {
-    let (row, col) = index.to_row_col();
+pub const ALL_PIECES: [PieceType; 6] = [
+    King,
+    Queen,
+    Rook,
+    Knight,
+    Bishop,
+    Pawn,
+];
 
-    is_square_colored(row, col)
-}
+pub const ALL_PROMOTABLE_PIECES: [PieceType; 5] = [
+    King,
+    Queen,
+    Rook,
+    Knight,
+    Bishop,
+];
 
 pub fn is_square_colored(row: usize, col: usize) -> bool {
     (col % 2 == 0).bitxor(row % 2 == 0)
