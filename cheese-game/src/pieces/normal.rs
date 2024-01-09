@@ -77,7 +77,8 @@ fn append_moves(
                     if p.owner != piece.owner {
                         moves.push(this);
                     }
-                    continue;
+
+                    break;
                 }
                 moves.push(this);
             }
