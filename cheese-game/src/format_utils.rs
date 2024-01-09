@@ -6,7 +6,7 @@ use crate::{
 
 pub fn format_board_ascii(board: &Board) -> String {
     let mut formatted = String::with_capacity(200);
-    for (rowi, row) in board.0.iter().enumerate() {
+    for (rowi, row) in board.0.iter().rev().enumerate() {
         for col in 0..8 {
             match row[col] {
                 Some(p) => {
@@ -52,7 +52,7 @@ pub fn format_ascii_piece(piece: Piece) -> [char; 2] {
 
 pub fn format_board_fancy(board: &Board) -> String {
     let mut formatted = String::with_capacity(200);
-    for (rowi, row) in board.0.iter().enumerate() {
+    for (rowi, row) in board.0.iter().rev().enumerate() {
         for col in 0..8 {
             if utils::is_square_colored(rowi, col) {
                 formatted.push_str("\x1B[47m");
