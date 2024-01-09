@@ -1,4 +1,7 @@
-use std::{fmt::Display, ops::Index};
+use std::{
+    fmt::Display,
+    ops::{Index, IndexMut},
+};
 
 pub mod cells;
 pub mod format_utils;
@@ -56,6 +59,19 @@ impl Index<Cell> for Board {
     }
 }
 
+impl IndexMut<usize> for Board {
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        &mut self.0[index]
+    }
+}
+
+impl IndexMut<Cell> for Board {
+    fn index_mut(&mut self, index: Cell) -> &mut Self::Output {
+        let (row, col) = index.to_row_col();
+        &mut self[row][col]
+    }
+}
+
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct Row([Option<Piece>; 8]);
 
@@ -66,6 +82,12 @@ impl Index<usize> for Row {
 
     fn index(&self, index: usize) -> &Self::Output {
         &self.0[index]
+    }
+}
+
+impl IndexMut<usize> for Row {
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        &mut self.0[index]
     }
 }
 

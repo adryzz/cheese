@@ -1,5 +1,5 @@
 use crate::{
-    pieces::{knight, pawn, normal},
+    pieces::{knight, normal, pawn},
     Board, Cell, Piece, PieceType, Player,
 };
 
