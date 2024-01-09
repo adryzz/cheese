@@ -1,4 +1,4 @@
-use crate::{game::Move, Board, Cell, PieceType};
+use crate::{game::Move, Board, Cell, PieceType, Piece};
 
 use super::board_add;
 
@@ -34,9 +34,9 @@ pub fn append_all_moves(board: &Board, src: Cell, moves: &mut Vec<Move>) {
     ];
 
     match piece.piece {
-        PieceType::Rook => append_moves(board, src, moves, piece.piece, &straight_moves),
-        PieceType::Bishop => append_moves(board, src, moves, piece.piece, &diag_moves),
-        PieceType::Queen | PieceType::King => append_moves(board, src, moves, piece.piece, &all_moves),
+        PieceType::Rook => append_moves(board, src, moves, piece, &straight_moves),
+        PieceType::Bishop => append_moves(board, src, moves, piece, &diag_moves),
+        PieceType::Queen | PieceType::King => append_moves(board, src, moves, piece, &all_moves),
         _ => {}
     }
 }
@@ -45,14 +45,14 @@ fn append_moves(
     board: &Board,
     src: Cell,
     moves: &mut Vec<Move>,
-    piece: PieceType,
+    piece: Piece,
     patterns: &[(isize, isize)],
 ) {
     let (row, col) = src.to_row_col();
 
 
 
-    let depth = if piece == PieceType::King {1} else {7};
+    let depth = if piece.piece == PieceType::King {1} else {7};
 
 
     for current in patterns {
@@ -68,15 +68,18 @@ fn append_moves(
                 let this = Move {
                     src,
                     dst,
-                    piece,
+                    piece: piece.piece,
                     capture,
                     extra: None
                 };
-                moves.push(this);
-
-                if capture.is_some() {
+                
+                if let Some(p) = capture {
+                    if p.owner != piece.owner {
+                        moves.push(this);
+                    }
                     continue;
                 }
+                moves.push(this);
             }
         }
     }
