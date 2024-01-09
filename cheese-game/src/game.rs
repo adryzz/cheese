@@ -1,5 +1,7 @@
-use crate::{Cell, Piece, PieceType, Board, Player, pieces::{knight, pawn}};
-
+use crate::{
+    pieces::{knight, pawn, normal},
+    Board, Cell, Piece, PieceType, Player,
+};
 
 pub struct ChessProcessor;
 
@@ -12,10 +14,10 @@ impl ChessProcessor {
                 let piece = board[row][col];
                 if let Some(p) = piece {
                     if p.owner == player {
-
                         let cell = Cell::from_row_col(row, col);
                         knight::append_all_moves(board, cell, &mut moves);
                         pawn::append_all_moves(board, cell, &mut moves);
+                        normal::append_all_moves(board, cell, &mut moves);
                     }
                 }
             }
@@ -35,12 +37,12 @@ pub struct Move {
     pub dst: Cell,
     pub piece: PieceType,
     pub capture: Option<Piece>,
-    pub extra: Option<AdditionalMoveData>
+    pub extra: Option<AdditionalMoveData>,
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum AdditionalMoveData {
     LongCastle,
     ShortCastle,
-    Promotion(PieceType)
+    Promotion(PieceType),
 }

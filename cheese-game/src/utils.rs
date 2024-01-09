@@ -1,10 +1,10 @@
 use std::ops::BitXor;
 
 use crate::{
-    Board, Piece,
-    PieceType::{Bishop, King, Knight, Pawn, Queen, Rook, self},
+    Board, Cell, Piece,
+    PieceType::{self, Bishop, King, Knight, Pawn, Queen, Rook},
     Player::{Black, White},
-    Row, EMPTY_ROW, Cell,
+    Row, EMPTY_ROW,
 };
 
 const WHITE_FIRST: Row = Row([
@@ -46,22 +46,9 @@ pub fn init_board() -> Board {
     ])
 }
 
-pub const ALL_PIECES: [PieceType; 6] = [
-    King,
-    Queen,
-    Rook,
-    Knight,
-    Bishop,
-    Pawn,
-];
+pub const ALL_PIECES: [PieceType; 6] = [King, Queen, Rook, Knight, Bishop, Pawn];
 
-pub const ALL_PROMOTABLE_PIECES: [PieceType; 5] = [
-    King,
-    Queen,
-    Rook,
-    Knight,
-    Bishop,
-];
+pub const ALL_PROMOTABLE_PIECES: [PieceType; 5] = [King, Queen, Rook, Knight, Bishop];
 
 pub fn is_square_colored(row: usize, col: usize) -> bool {
     (col % 2 == 0).bitxor(row % 2 == 0)

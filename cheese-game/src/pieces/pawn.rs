@@ -1,9 +1,11 @@
-use crate::{PieceType, Board, Cell, game::{Move, AdditionalMoveData::Promotion}, Player, utils};
+use crate::{
+    game::{AdditionalMoveData::Promotion, Move},
+    utils, Board, Cell, PieceType, Player,
+};
 
 use super::board_add;
 
 pub fn append_all_moves(board: &Board, src: Cell, moves: &mut Vec<Move>) {
-
     let owner = match board[src] {
         Some(p) => {
             if p.piece != PieceType::Pawn {
@@ -12,7 +14,7 @@ pub fn append_all_moves(board: &Board, src: Cell, moves: &mut Vec<Move>) {
 
             p.owner
         }
-        None => return
+        None => return,
     };
 
     let dir = match owner {
@@ -39,7 +41,7 @@ pub fn append_all_moves(board: &Board, src: Cell, moves: &mut Vec<Move>) {
                         dst,
                         piece: PieceType::Pawn,
                         capture: None,
-                        extra: Some(Promotion(piece))
+                        extra: Some(Promotion(piece)),
                     };
                     moves.push(this);
                 }
@@ -49,7 +51,7 @@ pub fn append_all_moves(board: &Board, src: Cell, moves: &mut Vec<Move>) {
                     dst,
                     piece: PieceType::Pawn,
                     capture: None,
-                    extra: None
+                    extra: None,
                 };
 
                 moves.push(this);

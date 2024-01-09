@@ -1,4 +1,5 @@
 pub mod knight;
+pub mod normal;
 pub mod pawn;
 
 fn board_add(pos: isize, rhs: isize) -> Option<usize> {

@@ -1,10 +1,10 @@
-use std::{ops::Index, fmt::Display};
+use std::{fmt::Display, ops::Index};
 
-mod utils;
-pub mod format_utils;
 pub mod cells;
+pub mod format_utils;
 pub mod game;
 mod pieces;
+mod utils;
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum PieceType {
@@ -75,7 +75,6 @@ impl Board {
     }
 }
 
-
 /// Chess uses bottom-left indices
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct Cell(usize);
@@ -102,7 +101,7 @@ impl Display for Cell {
             5 => 'f',
             6 => 'g',
             7 => 'h',
-            _ => panic!()
+            _ => panic!(),
         };
 
         write!(f, "{}{}", colc, row + 1)

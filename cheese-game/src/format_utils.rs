@@ -1,7 +1,7 @@
 use crate::{
-    Board, Piece,
+    utils, Board, Piece,
     PieceType::{Bishop, King, Knight, Pawn, Queen, Rook},
-    Player::{Black, White}, utils,
+    Player::{Black, White},
 };
 
 pub fn format_board_ascii(board: &Board) -> String {
@@ -14,7 +14,7 @@ pub fn format_board_ascii(board: &Board) -> String {
                     formatted.push(' ');
                     formatted.push(piece[0]);
                     formatted.push(piece[1]);
-                },
+                }
                 None => {
                     formatted.push(' ');
                     formatted.push(' ');
@@ -39,12 +39,12 @@ pub fn format_ascii_piece(piece: Piece) -> [char; 2] {
         Rook => 'R',
         Knight => 'N',
         Bishop => 'B',
-        Pawn => 'P'
+        Pawn => 'P',
     };
 
     let owner_char = match piece.owner {
         White => 'w',
-        Black => 'b'
+        Black => 'b',
     };
 
     [owner_char, letter]
@@ -65,7 +65,7 @@ pub fn format_board_fancy(board: &Board) -> String {
                     formatted.push(' ');
                     formatted.push(piece);
                     formatted.push(' ');
-                },
+                }
                 None => {
                     formatted.push_str("   ");
                 }
