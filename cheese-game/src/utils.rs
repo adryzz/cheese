@@ -1,7 +1,7 @@
 use std::ops::BitXor;
 
 use crate::{
-    Board, Cell, Piece,
+    Board, Piece,
     PieceType::{self, Bishop, King, Knight, Pawn, Queen, Rook},
     Player::{Black, White},
     Row, EMPTY_ROW,
@@ -45,8 +45,6 @@ pub fn init_board() -> Board {
         BLACK_FIRST,
     ])
 }
-
-pub const ALL_PIECES: [PieceType; 6] = [King, Queen, Rook, Knight, Bishop, Pawn];
 
 pub const ALL_PROMOTABLE_PIECES: [PieceType; 5] = [King, Queen, Rook, Knight, Bishop];
 
